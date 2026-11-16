@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-deepseek-peak-hours",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Live DeepSeek API peak/off-peak window badge for the DSH composer, with a click-open price table for FLASH and PRO.",
   "type": "module",
   "license": "MIT",
@@ -8,8 +8,15 @@
     "dsh",
     "dsh-plugin",
     "deepseek",
+    "deepseek-api",
+    "deepseek-harness",
     "pricing",
     "peak-hours",
+    "off-peak",
+    "billing",
+    "cost",
+    "token-pricing",
+    "composer",
     "cordis"
   ],
   "author": "hifengzy",
@@ -33,7 +40,8 @@
     "cordis.patch.yml",
     "locale",
     "icon.svg",
-    "README.md"
+    "README.md",
+    "README.zh.md"
   ],
   "scripts": {
     "test": "node --test",
