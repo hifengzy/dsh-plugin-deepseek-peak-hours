@@ -79,7 +79,8 @@ test('apply registers both slots and the dictionaries', () => {
     { name: 'conversation.hero.options', locale: 'deepseekPeakHours', id: 'deepseek-peak-hours', order: 10 },
   ])
   assert.equal(typeof seen.registrations[0].Component, 'function')
-  assert.equal(seen.registrations[0].Component, seen.registrations[1].Component)
+  // One wrapper per surface: the dock reading is 22px, the New Session chip 28px.
+  assert.notEqual(seen.registrations[0].Component, seen.registrations[1].Component)
   assert.deepEqual(seen.effects, ['deepseek-peak-hours: dictionaries'])
   assert.equal(seen.locales.length, 1)
   assert.equal(seen.locales[0].namespace, 'deepseekPeakHours')
@@ -116,4 +117,11 @@ test('both dictionaries cover the same keys, and every literal key exists', () =
   assert.match(dictionaries.zh['label.idle'], /\{range\}/)
   assert.match(dictionaries.zh['label.peak'], /^峰时 /)
   assert.match(dictionaries.zh['label.idle'], /^闲时 /)
+})
+
+test('the hero chip is 28px while the dock reading stays 22px', () => {
+  // The New Session row's native controls (workspace chip, preset seat, worktree
+  // toggle) are 28px chips; the composer statistics row reads at 22px.
+  assert.match(source, /\.dph-root\[data-surface='hero'\] \.dph-trigger\{height:28px;padding:0 8px/)
+  assert.match(source, /\.dph-trigger\{[^}]*padding:1px 8px/)
 })

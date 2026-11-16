@@ -249,6 +249,7 @@ window.__ModuleLoader__.load({
 .dph-dot{width:6px;height:6px;flex:none;border-radius:999px}
 .dph-dot[data-mode='peak']{background:var(--dsw-alias-state-warn-primary)}
 .dph-dot[data-mode='idle']{background:var(--dsw-alias-state-success-primary)}
+.dph-root[data-surface='hero'] .dph-trigger{height:28px;padding:0 8px;color:var(--dsw-alias-label-secondary);font-weight:500}
 .dph-label{min-width:0;overflow:hidden;text-overflow:ellipsis}
 .dph-panel{position:fixed;z-index:1100;box-sizing:border-box;left:0;top:0;visibility:hidden;width:max-content;min-width:min(300px,calc(100vw - 24px));max-width:min(432px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:16px;border:0;border-radius:var(--dsw-radius-lg);background:var(--dsw-specific-menu);backdrop-filter:var(--dsw-menu-backdrop-filter);--dsw-elevation-stroke-color:var(--dsw-alias-border-l1);box-shadow:var(--dsw-elevation-prominent);font-size:12px;line-height:18px;color:var(--dsw-alias-label-secondary);cursor:default;overflow-x:hidden;overflow-y:auto;--dsh-scrollbar-thumb:var(--dsw-alias-scrollbar-bg-l2);--dsh-scrollbar-thumb-hover:var(--dsw-alias-scrollbar-hover-l2)}
 .dph-title{display:flex;justify-content:space-between;gap:16px;margin-bottom:8px;color:var(--dsw-alias-label-primary);font-weight:500}
@@ -289,11 +290,18 @@ window.__ModuleLoader__.load({
 
     /**
      * The badge: a compact reading that opens the current window's price table.
-     * @param props - slot props; the locale seat carries this plugin's texts.
+     *
+     * `surface` selects the host row it sits in. The composer statistics row
+     * reads at 22px (the height of the built-in context meter and stat pills),
+     * while the New Session options row uses the compact 28px chip geometry of
+     * the workspace, preset, and worktree controls; the two must not share one
+     * height or one of them breaks the row it belongs to.
+     * @param props - slot props, plus the surface this registration renders in.
      * @returns the badge and, while open, its portaled dialog.
      */
     function PeakHoursBadge(props) {
       const t = props.t
+      const surface = props.surface === 'hero' ? 'hero' : 'dock'
       const [now, setNow] = React.useState(() => Date.now())
       const [open, setOpen] = React.useState(false)
       const rootRef = React.useRef(null)
@@ -428,6 +436,7 @@ window.__ModuleLoader__.load({
             className: 'dph-root',
             'data-peak-hours': anchorId,
             'data-mode': mode,
+            'data-surface': surface,
           },
           h(
             'button',
@@ -448,6 +457,24 @@ window.__ModuleLoader__.load({
       )
     }
 
+    /**
+     * Wrap the badge for one host row.
+     * @param surface - `dock` for the composer statistics row, `hero` for the New Session row.
+     * @returns a slot component bound to that row's geometry.
+     */
+    function badgeFor(surface) {
+      function SurfaceBadge(props) {
+        return h(PeakHoursBadge, { ...props, surface })
+      }
+      SurfaceBadge.displayName = `PeakHoursBadge(${surface})`
+      return SurfaceBadge
+    }
+
+    // Stable identities: a slot owner that re-declares (an input bar remount)
+    // must not hand React a new component type and remount the open dialog.
+    const DOCK_BADGE = badgeFor('dock')
+    const HERO_BADGE = badgeFor('hero')
+
     return {
       inject: ['slots', 'locale'],
       apply(ctx) {
@@ -455,13 +482,13 @@ window.__ModuleLoader__.load({
           () => ctx.locale.register(NS, { zh: ZH, en: EN }),
           'deepseek-peak-hours: dictionaries',
         )
-        const register = (name, options) => {
-          ctx.slots.inject(name, () => ctx.slots.register({ name, locale: NS, ...options }, PeakHoursBadge))
+        const register = (name, options, Component) => {
+          ctx.slots.inject(name, () => ctx.slots.register({ name, locale: NS, ...options }, Component))
         }
         // The dock entry renders before the built-in context meter in DOM order;
         // `.dph-root{order:1}` moves it after the meter inside the same flex row.
-        register(DOCK_SLOT, { id: ENTRY_ID, order: 10 })
-        register(HERO_SLOT, { id: ENTRY_ID, order: 10 })
+        register(DOCK_SLOT, { id: ENTRY_ID, order: 10 }, DOCK_BADGE)
+        register(HERO_SLOT, { id: ENTRY_ID, order: 10 }, HERO_BADGE)
       },
     }
   },

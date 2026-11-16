@@ -60,6 +60,7 @@ Or point it at this repository's directory for local development. The plugin is 
 - **One timer, no polling**: it wakes at the next window boundary only — 00:00, 09:00, 12:00, 14:00 and 18:00 Beijing time, at most five times a day. Coming back to a background tab, or waking a laptop, recomputes from the current clock.
 - **No network calls**: the schedule, the holiday calendar, and the price table all ship in the bundle.
 - **No dependencies**: it uses only the browser module table's `react` / `react-dom`, and never imports `@deepseek-ai/dsh-client-ui-primitives` or other DSH Client packages that change without notice.
+- **Row-native geometry**: 22px tall in the composer statistics row, exactly like the context meter and the stat pills; 28px with secondary ink in the New Session row, matching the workspace, preset and worktree chips beside it.
 - **Native styling**: every color, radius, shadow and font size comes from `--dsw-*` / `--dsh-*` theme tokens, so light and dark themes both match; the popover copies the built-in statistics dialog (12px padding, `--dsw-radius-lg`, `elevation-prominent`, z-index 1100, Escape and outside-click dismissal).
 - **Beijing time only**: the billing rule is defined in Beijing time, so the badge always computes in `Asia/Shanghai` regardless of the machine's zone (the test suite also passes under `TZ=America/New_York`).
 - **Clean teardown**: styles render as a React element and disappear on unmount; the timer and listeners are released in effect cleanups.

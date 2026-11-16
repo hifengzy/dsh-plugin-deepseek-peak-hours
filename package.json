@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-deepseek-peak-hours",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Live DeepSeek API peak/off-peak window badge for the DSH composer, with a click-open price table for FLASH and PRO.",
   "type": "module",
   "license": "MIT",
