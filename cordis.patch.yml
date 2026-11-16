@@ -1,0 +1,5 @@
+# Host row for the bundle: the Client module owns the badge, so the Host half
+# only has to exist for Plugin Manager to list and enable the bundle.
+- insert:
+    - id: deepseek-peak-hours
+      name: 'dsh-plugin-deepseek-peak-hours'

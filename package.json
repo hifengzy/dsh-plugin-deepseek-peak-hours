@@ -1,0 +1,54 @@
+{
+  "name": "dsh-plugin-deepseek-peak-hours",
+  "version": "1.0.0",
+  "description": "Live DeepSeek API peak/off-peak window badge for the DSH composer, with a click-open price table for FLASH and PRO.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek",
+    "pricing",
+    "peak-hours",
+    "cordis"
+  ],
+  "author": "hifengzy",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hifengzy/dsh-plugin-deepseek-peak-hours.git"
+  },
+  "homepage": "https://github.com/hifengzy/dsh-plugin-deepseek-peak-hours#readme",
+  "bugs": {
+    "url": "https://github.com/hifengzy/dsh-plugin-deepseek-peak-hours/issues"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale",
+    "icon.svg",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "test:tz": "TZ=America/New_York node --test"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  }
+}

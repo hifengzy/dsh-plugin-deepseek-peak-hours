@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "DeepSeek peak hours",
+    "description": "Shows the running DeepSeek API peak or off-peak billing window in the composer, right of the context meter, and in the New Session options row; clicking it opens the FLASH and PRO price table for that window. The schedule follows the official pricing page: Beijing time, Monday to Friday except Chinese statutory holidays, 09:00 - 12:00 and 14:00 - 18:00 bill at peak, and everything else bills at half price. One timer flips the reading at 00:00, 09:00, 12:00, 14:00 and 18:00 Beijing time; nothing polls. Limits: DSH has no plugin seat under the composer on a home with no session, so the badge appears once a session is selected or created; holiday data ships for 2026-2027, and a later year falls back to the plain weekday rule until the plugin is updated."
+  }
+}
