@@ -4,7 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/dsh-plugin-deepseek-peak-hours.svg)](https://www.npmjs.com/package/dsh-plugin-deepseek-peak-hours)
 [![license](https://img.shields.io/npm/l/dsh-plugin-deepseek-peak-hours.svg)](./LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/hifengzy/dsh-plugin-deepseek-peak-hours.svg)](https://github.com/hifengzy/dsh-plugin-deepseek-peak-hours/stargazers)
-[![CI](https://github.com/hifengzy/dsh-plugin-deepseek-peak-hours/actions/workflows/ci.yml/badge.svg)](https://github.com/hifengzy/dsh-plugin-deepseek-peak-hours/actions/workflows/ci.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/hifengzy/dsh-plugin-deepseek-peak-hours/ci.yml?branch=main)](https://github.com/hifengzy/dsh-plugin-deepseek-peak-hours/actions/workflows/ci.yml)
 
 **English** · [简体中文](./README.zh.md)
 
@@ -24,6 +24,25 @@ Peak 09:00 - 12:00     ← click for the price table
 - **Reading**: `Peak 09:00 - 12:00` during a peak window, `Off-peak 18:00 - 24:00` otherwise. Overnight and whole-day windows read their real range: `00:00 - 09:00`, `18:00 - 24:00`, `00:00 - 24:00`.
 - **Click**: a table for the running window — rows `Input, 1M tokens (cache hit)` / `Input, 1M tokens (cache miss)` / `Output, 1M tokens`, columns `FLASH (CNY)` and `PRO (CNY)`, plus the note that off-peak rates are half the peak rates.
 - **State dot**: amber for peak, green for off-peak, from DSH's `--dsw-alias-state-warn-primary` and `--dsw-alias-state-success-primary` tokens.
+
+## Screenshots
+
+The interface is shown in Chinese; the same layouts appear in every locale.
+
+**New Session** — the badge rides the options row right of the workspace and preset chips, matching their 28px chip height. Peak on the left, off-peak on the right.
+
+![New Session with the peak badge](docs/screenshots/hero-peak.png)
+![New Session with the off-peak badge](docs/screenshots/hero-offpeak.png)
+
+**An existing session** — the badge is the last reading in the statistics row under the composer, immediately right of the context meter, and keeps that row's 22px height.
+
+![Composer statistics row with the peak badge](docs/screenshots/composer-peak.png)
+![Composer statistics row with the off-peak badge](docs/screenshots/composer-offpeak.png)
+
+**Click for prices** — the popover lists the FLASH and PRO price of the running window, with the note that off-peak rates are half the peak rates.
+
+![Peak price table](docs/screenshots/prices-peak.png)
+![Off-peak price table](docs/screenshots/prices-offpeak.png)
 
 ## Schedule and prices (official, not invented)
 

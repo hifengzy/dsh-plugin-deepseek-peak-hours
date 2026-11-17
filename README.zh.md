@@ -4,7 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/dsh-plugin-deepseek-peak-hours.svg)](https://www.npmjs.com/package/dsh-plugin-deepseek-peak-hours)
 [![license](https://img.shields.io/npm/l/dsh-plugin-deepseek-peak-hours.svg)](./LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/hifengzy/dsh-plugin-deepseek-peak-hours.svg)](https://github.com/hifengzy/dsh-plugin-deepseek-peak-hours/stargazers)
-[![CI](https://github.com/hifengzy/dsh-plugin-deepseek-peak-hours/actions/workflows/ci.yml/badge.svg)](https://github.com/hifengzy/dsh-plugin-deepseek-peak-hours/actions/workflows/ci.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/hifengzy/dsh-plugin-deepseek-peak-hours/ci.yml?branch=main)](https://github.com/hifengzy/dsh-plugin-deepseek-peak-hours/actions/workflows/ci.yml)
 
 [English](./README.md) · **简体中文**
 
@@ -24,6 +24,23 @@
 - **文案**：峰时显示 `峰时 09:00 - 12:00`，闲时显示 `闲时 18:00 - 24:00`；跨夜与整日空闲显示真实区间，如 `00:00 - 09:00`、`18:00 - 24:00`、`00:00 - 24:00`。
 - **点击**：弹出当前时段的价目表 —— 行为「百万 tok 输入（缓存命中）」「百万 tok 输入（缓存未命中）」「百万 tok 输出」，列为 `FLASH（元）` 与 `PRO（元）`，并注明「空闲时段单价为高峰时段的一半」。
 - **状态点**：峰时琥珀色、闲时绿色，取自 DSH 的 `--dsw-alias-state-warn-primary` 与 `--dsw-alias-state-success-primary`。
+
+## 截图
+
+**新会话首页** —— 徽标在输入框上方选项行的右侧，与工作区、预设按钮同为 28px 高。左为峰时，右为闲时。
+
+![新会话首页 · 峰时](docs/screenshots/hero-peak.png)
+![新会话首页 · 闲时](docs/screenshots/hero-offpeak.png)
+
+**已有会话** —— 徽标是输入框下方统计行的最后一个读数，紧挨「上下文已用 x%」右侧，保持该行 22px 的高度。
+
+![输入框底部统计行 · 峰时](docs/screenshots/composer-peak.png)
+![输入框底部统计行 · 闲时](docs/screenshots/composer-offpeak.png)
+
+**点击查看价格** —— 弹层列出当前时段的 FLASH 与 PRO 单价，并注明空闲时段单价为高峰时段的一半。
+
+![价格弹窗 · 峰时](docs/screenshots/prices-peak.png)
+![价格弹窗 · 闲时](docs/screenshots/prices-offpeak.png)
 
 ## 时段与价格（官方定义，非臆造）
 
